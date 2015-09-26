@@ -211,4 +211,9 @@
     <!-- statusbar brightness -->
     <string name="status_bar_brightness_control_title">Brightness control</string>
     <string name="status_bar_brightness_control_summary">Adjust brightness by sliding across status bar</string>
+
+    <!-- Status Bar Activity Indicators -->
+    <string name="status_bar_network_activity_title">Activity indicators</string>
+    <string name="status_bar_network_activity_summary">Show indicators in signal bars</string>
+
 </resources>
