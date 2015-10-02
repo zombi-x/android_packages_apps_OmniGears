@@ -54,8 +54,6 @@ public class BarsSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, Indexable {
     private static final String TAG = "BarsSettings";
 
-    private static final String STATUSBAR_BATTERY_STYLE = "statusbar_battery_style";
-    private static final String STATUSBAR_BATTERY_PERCENT = "statusbar_battery_percent";
     private static final String NAVIGATION_BAR_CATEGORY = "navbar_category";
     private static final String NAVIGATION_BAR_RECENTS_STYLE = "navbar_recents_style";
     private static final String NETWORK_TRAFFIC_STATE = "network_traffic_state";
@@ -64,8 +62,6 @@ public class BarsSettings extends SettingsPreferenceFragment implements
     private static final String NETWORK_TRAFFIC_AUTOHIDE = "network_traffic_autohide";
     private static final String NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD = "network_traffic_autohide_threshold";
 
-    private ListPreference mBatteryStyle;
-    private ListPreference mBatteryPercent;
     private ListPreference mNavbarRecentsStyle;
     private ListPreference mNetTrafficState;
     private ListPreference mNetTrafficUnit;
@@ -87,22 +83,6 @@ public class BarsSettings extends SettingsPreferenceFragment implements
 
         PreferenceScreen prefScreen = getPreferenceScreen();
         ContentResolver resolver = getActivity().getContentResolver();
-
-        mBatteryStyle = (ListPreference) findPreference(STATUSBAR_BATTERY_STYLE);
-        int batteryStyle = Settings.System.getInt(resolver,
-                Settings.System.STATUSBAR_BATTERY_STYLE, 0);
-
-        mBatteryStyle.setValue(Integer.toString(batteryStyle));
-        mBatteryStyle.setSummary(mBatteryStyle.getEntry());
-        mBatteryStyle.setOnPreferenceChangeListener(this);
-
-        mBatteryPercent = (ListPreference) findPreference(STATUSBAR_BATTERY_PERCENT);
-        int batteryPercent = Settings.System.getInt(resolver,
-                Settings.System.STATUSBAR_BATTERY_PERCENT, 2);
-
-        mBatteryPercent.setValue(Integer.toString(batteryPercent));
-        mBatteryPercent.setSummary(mBatteryPercent.getEntry());
-        mBatteryPercent.setOnPreferenceChangeListener(this);
 
         final boolean showNavBar = DeviceUtils.deviceSupportNavigationBar(getActivity());
         final PreferenceCategory navbarCategory =
@@ -170,21 +150,7 @@ public class BarsSettings extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         ContentResolver resolver = getActivity().getContentResolver();
-        if (preference == mBatteryStyle) {
-            int value = Integer.valueOf((String) newValue);
-            int index = mBatteryStyle.findIndexOfValue((String) newValue);
-            mBatteryStyle.setSummary(
-                    mBatteryStyle.getEntries()[index]);
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.STATUSBAR_BATTERY_STYLE, value);
-        } else if (preference == mBatteryPercent) {
-            int value = Integer.valueOf((String) newValue);
-            int index = mBatteryPercent.findIndexOfValue((String) newValue);
-            mBatteryPercent.setSummary(
-                    mBatteryPercent.getEntries()[index]);
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.STATUSBAR_BATTERY_PERCENT, value);
-        } else if (preference == mNavbarRecentsStyle) {
+        if (preference == mNavbarRecentsStyle) {
             int value = Integer.valueOf((String) newValue);
             if (value == 1) {
                 if (!isOmniSwitchInstalled()){
