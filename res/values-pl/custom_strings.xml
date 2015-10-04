@@ -39,6 +39,7 @@
   <string name="keys_app_switch_long_press_title">Przycisk przełączenia aplikacji (przytrzymanie)</string>
   <string name="keys_action_nothing">Brak akcji</string>
   <string name="keys_action_menu">Otwórz/zamknij menu</string>
+  <string name="keys_action_app_switch">Ostatnio otwarte aplikacje AOSP</string>
   <string name="keys_action_search">Asystent wyszukiwania</string>
   <string name="keys_action_voice_search">Wyszukiwanie głosowe</string>
   <string name="keys_action_in_app_search">Wyszukiwanie wewnątrz aplikacji</string>
@@ -142,4 +143,10 @@
   <string name="navigation_bar_show_summary">Wymuś pasek nawigacyjny</string>
   <string name="hardware_keys_disable_title">Wyłącz klawisze</string>
   <string name="hardware_keys_disable_summary">Wymuś wyłączenie klawiszy sprzętowych</string>
+  <string name="navbar_title">Pasek nawigacyjny</string>
+  <string name="navbar_recents_style_title">Styl ostatnio otwartych aplikacji</string>
+  <string name="omniswitch_settings">Ustawienia</string>
+  <string name="omniswitch_dialog_running">OmniSwitch nie jest uruchomiony. Upewnij się, że włączyłeś go przed aktywowaniem go jako ostatnio otwarte aplikacje.</string>
+  <string name="omniswitch_dialog_unavail">OmniSwitch nie jest zainstalowany.</string>
+  <string name="omniswitch_title">OmniSwitch</string>
 </resources>
