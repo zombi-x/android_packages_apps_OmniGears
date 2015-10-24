@@ -37,6 +37,7 @@ import android.provider.Settings.SettingNotFoundException;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.omni.DeviceUtils;
 import com.android.settings.Utils;
 import com.android.settings.preference.SeekBarPreference;
@@ -74,6 +75,11 @@ public class BarsSettings extends SettingsPreferenceFragment implements
     private int MASK_DOWN;
     private int MASK_UNIT;
     private int MASK_PERIOD;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.OMNI_SETTINGS;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

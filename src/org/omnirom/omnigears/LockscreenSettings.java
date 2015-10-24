@@ -26,6 +26,7 @@ import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.SettingsPreferenceFragment;
 
 public class LockscreenSettings extends SettingsPreferenceFragment {
@@ -36,6 +37,11 @@ public class LockscreenSettings extends SettingsPreferenceFragment {
 
     private Preference mSetWallpaper;
     private Preference mClearWallpaper;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.OMNI_SETTINGS;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

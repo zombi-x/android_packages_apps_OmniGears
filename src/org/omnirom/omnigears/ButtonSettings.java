@@ -64,6 +64,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.preference.SystemCheckBoxPreference;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.omni.OmniSwitchConstants;
 import com.android.internal.util.omni.PackageUtils;
 import com.android.internal.util.omni.DeviceUtils;
@@ -161,6 +162,11 @@ public class ButtonSettings extends SettingsPreferenceFragment implements OnPref
     private PreferenceCategory mKeysMenuCategory;
     private PreferenceCategory mKeysAppSwitchCategory;
     private PreferenceCategory mKeysAssistCategory;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.OMNI_SETTINGS;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

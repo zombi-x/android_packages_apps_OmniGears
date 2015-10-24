@@ -47,6 +47,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.preference.SystemCheckBoxPreference;
 import org.omnirom.omnigears.sensor.ShakeSensorManager;
@@ -85,6 +86,11 @@ public class AmbientSettings extends SettingsPreferenceFragment implements
     private Button mShakeFoundButton;
     private DozeBrightnessDialog mDozeBrightnessDialog;
     private Preference mDozeBrightness;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.OMNI_SETTINGS;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

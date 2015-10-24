@@ -48,6 +48,7 @@ import android.widget.TextView;
 
 import org.omnirom.omnigears.R;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.preference.SeekBarPreference;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -71,6 +72,11 @@ public class ButtonBrightnessSettings extends SettingsPreferenceFragment impleme
     private ManualButtonBrightnessDialog mManualBrightnessDialog;
     private IPowerManager mPowerService;
     private SeekBarPreference mButtonTimoutBar;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.OMNI_SETTINGS;
+    }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

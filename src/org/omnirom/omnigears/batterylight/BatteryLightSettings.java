@@ -31,6 +31,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.android.internal.logging.MetricsLogger;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -61,6 +62,11 @@ public class BatteryLightSettings extends SettingsPreferenceFragment implements
     private static final int MENU_RESET = Menu.FIRST;
     private int mLowBatteryWarningLevel;
     private boolean mBatteryLightEnabled;
+
+    @Override
+    protected int getMetricsCategory() {
+        return MetricsLogger.OMNI_SETTINGS;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
