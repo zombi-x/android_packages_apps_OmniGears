@@ -75,7 +75,7 @@
         android:key="button_keys"
         android:title="@string/button_keys_title" >
 
-        <SwitchPreference
+        <!--<SwitchPreference
             android:key="navigation_bar_show"
             android:title="@string/navigation_bar_show_title"
             android:summary="@string/navigation_bar_show_summary"
@@ -87,7 +87,7 @@
             android:summary="@string/hardware_keys_disable_summary"
             android:persistent="false"/>
 
-        <!--<CheckBoxPreference
+        <CheckBoxPreference
             android:key="virtual_key_haptic_feedback"
             android:title="@string/virtual_key_haptic_feedback_title"
             android:summary="@string/virtual_key_haptic_feedback_summary"
@@ -105,10 +105,10 @@
             android:summary="@string/button_brightness_summary"
             android:fragment="org.omnirom.omnigears.brightness.ButtonBrightnessSettings" />
 
-        <SwitchPreference
+        <!--<SwitchPreference
             android:key="keys_enable_custom"
             android:title="@string/keys_enable_custom_title"
-            android:persistent="false" />
+            android:persistent="false" />-->
     </PreferenceCategory>
 
     <PreferenceCategory
