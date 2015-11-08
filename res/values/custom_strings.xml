@@ -180,9 +180,9 @@
     <string name="navbar_title">Navigation bar</string>
     <string name="navbar_recents_style_title">Recents style</string>
     <string name="omniswitch_settings">Settings</string>
-    <string name="omniswitch_dialog_running">OmniSwitch is not running. Please make sure to enable it before enabling it as recents.</string>
+    <string name="omniswitch_dialog_running">OmniSwitch is currently not enabled. Please enable it and tick the \u2019Start on boot\u2019 option in the settings.</string>
     <string name="omniswitch_dialog_unavail">OmniSwitch is not installed.</string>
-    <string name="omniswitch_title">OmniSwitch</string>
+    <string name="omniswitch_title">Recents style</string>
 
     <string name="doze_brightness_level_title">Brightness level</string>
 

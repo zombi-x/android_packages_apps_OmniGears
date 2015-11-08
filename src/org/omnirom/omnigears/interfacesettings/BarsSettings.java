@@ -56,14 +56,14 @@ public class BarsSettings extends SettingsPreferenceFragment implements
     private static final String TAG = "BarsSettings";
 
     private static final String NAVIGATION_BAR_CATEGORY = "navbar_category";
-    private static final String NAVIGATION_BAR_RECENTS_STYLE = "navbar_recents_style";
+//    private static final String NAVIGATION_BAR_RECENTS_STYLE = "navbar_recents_style";
     private static final String NETWORK_TRAFFIC_STATE = "network_traffic_state";
     private static final String NETWORK_TRAFFIC_UNIT = "network_traffic_unit";
     private static final String NETWORK_TRAFFIC_PERIOD = "network_traffic_period";
     private static final String NETWORK_TRAFFIC_AUTOHIDE = "network_traffic_autohide";
     private static final String NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD = "network_traffic_autohide_threshold";
 
-    private ListPreference mNavbarRecentsStyle;
+//    private ListPreference mNavbarRecentsStyle;
     private ListPreference mNetTrafficState;
     private ListPreference mNetTrafficUnit;
     private ListPreference mNetTrafficPeriod;
@@ -94,13 +94,13 @@ public class BarsSettings extends SettingsPreferenceFragment implements
         final PreferenceCategory navbarCategory =
                 (PreferenceCategory) prefScreen.findPreference(NAVIGATION_BAR_CATEGORY);
 
-        mNavbarRecentsStyle = (ListPreference) findPreference(NAVIGATION_BAR_RECENTS_STYLE);
+        /*mNavbarRecentsStyle = (ListPreference) findPreference(NAVIGATION_BAR_RECENTS_STYLE);
         int recentsStyle = Settings.System.getInt(resolver,
                 Settings.System.NAVIGATION_BAR_RECENTS, 0);
 
         mNavbarRecentsStyle.setValue(Integer.toString(recentsStyle));
         mNavbarRecentsStyle.setSummary(mNavbarRecentsStyle.getEntry());
-        mNavbarRecentsStyle.setOnPreferenceChangeListener(this);
+        mNavbarRecentsStyle.setOnPreferenceChangeListener(this);*/
 
         mNetTrafficState = (ListPreference) prefScreen.findPreference(NETWORK_TRAFFIC_STATE);
         mNetTrafficUnit = (ListPreference) prefScreen.findPreference(NETWORK_TRAFFIC_UNIT);
@@ -156,7 +156,7 @@ public class BarsSettings extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         ContentResolver resolver = getActivity().getContentResolver();
-        if (preference == mNavbarRecentsStyle) {
+        /*if (preference == mNavbarRecentsStyle) {
             int value = Integer.valueOf((String) newValue);
             if (value == 1) {
                 if (!isOmniSwitchInstalled()){
@@ -170,7 +170,7 @@ public class BarsSettings extends SettingsPreferenceFragment implements
                     mNavbarRecentsStyle.getEntries()[index]);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.NAVIGATION_BAR_RECENTS, value);
-        } else if (preference == mNetTrafficState) {
+        } else*/ if (preference == mNetTrafficState) {
             int intState = Integer.valueOf((String)newValue);
             mNetTrafficVal = setBit(mNetTrafficVal, MASK_UP, getBit(intState, MASK_UP));
             mNetTrafficVal = setBit(mNetTrafficVal, MASK_DOWN, getBit(intState, MASK_DOWN));
@@ -202,7 +202,7 @@ public class BarsSettings extends SettingsPreferenceFragment implements
         return true;
     }
 
-    private void doOmniSwitchConfig() {
+    /*private void doOmniSwitchConfig() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
         alertDialogBuilder.setTitle(R.string.omniswitch_title);
         alertDialogBuilder.setMessage(R.string.omniswitch_dialog_running)
@@ -225,7 +225,7 @@ public class BarsSettings extends SettingsPreferenceFragment implements
 
     private boolean isOmniSwitchInstalled() {
         return PackageUtils.isAvailableApp(OmniSwitchConstants.APP_PACKAGE_NAME, getActivity());
-    }
+    }*/
 
     private void loadResources() {
         Resources resources = getActivity().getResources();
