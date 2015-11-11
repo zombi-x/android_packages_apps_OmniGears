@@ -94,7 +94,7 @@ public class BatteryLightPreference extends Preference implements DialogInterfac
 
         if (mLightColorView != null) {
             mLightColorView.setEnabled(true);
-            mLightColorView.setImageDrawable(createRectShape(width, height, 0xFF000000 + mColorValue));
+            mLightColorView.setImageDrawable(createRectShape(width, height, 0xFF000000 | mColorValue));
         }
     }
 
@@ -108,14 +108,13 @@ public class BatteryLightPreference extends Preference implements DialogInterfac
 
     public Dialog getDialog() {
         final BatteryLightDialog d = new BatteryLightDialog(getContext(),
-                0xFF000000 + mColorValue);
-        d.setAlphaSliderVisible(false);
+                0xFF000000 | mColorValue);
 
         d.setButton(AlertDialog.BUTTON_POSITIVE, mResources.getString(R.string.ok),
                 new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                mColorValue =  d.getColor() - 0xFF000000; // strip alpha, led does not support it
+                mColorValue =  d.getColor() & 0x00FFFFFF; // strip alpha, led does not support it
                 updatePreferenceViews();
                 callChangeListener(this);
             }

@@ -107,8 +107,7 @@ public class ColorPickerPreference extends Preference implements DialogInterface
     }
 
     public Dialog getDialog() {
-        final ColorPickerDialog d = new ColorPickerDialog(getContext(), mColorValue);
-        d.setAlphaSliderVisible(true);
+        final ColorPickerDialog d = new ColorPickerDialog(getContext(), mColorValue, true);
 
         d.setButton(AlertDialog.BUTTON_POSITIVE, mResources.getString(R.string.ok),
                 new DialogInterface.OnClickListener() {
