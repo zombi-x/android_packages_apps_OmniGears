@@ -64,10 +64,11 @@ public class ColorPickerDialog extends AlertDialog implements
     private LayoutInflater mInflater;
     private boolean mMultiColor = true;
     private LinearLayout mColorPanelView;
+    private boolean mWithAlpha;
 
-    public ColorPickerDialog(Context context, int initialColor) {
+    public ColorPickerDialog(Context context, int initialColor, boolean withAlpha) {
         super(context);
-
+        mWithAlpha = withAlpha;
         init(initialColor);
     }
 
@@ -95,14 +96,12 @@ public class ColorPickerDialog extends AlertDialog implements
         mNewColor = (ColorPanelView) layout.findViewById(R.id.color_panel);
         mColorPanelView = (LinearLayout) layout.findViewById(R.id.color_panel_view);
 
-        setAlphaSliderVisible(true);
         mColorPicker.setOnColorChangedListener(this);
+        mHexColorInput.setOnFocusChangeListener(this);
+        setAlphaSliderVisible(mWithAlpha);
         mColorPicker.setColor(color, true);
 
-        mHexColorInput.setOnFocusChangeListener(this);
-
         setView(layout);
-        setTitle(R.string.color_picker_dialog_title);
 
         mColorPicker.setVisibility(View.VISIBLE);
         mColorPanelView.setVisibility(View.VISIBLE);
@@ -123,7 +122,7 @@ public class ColorPickerDialog extends AlertDialog implements
 
     @Override
     public void onColorChanged(int color) {
-        final boolean hasAlpha = mColorPicker.isAlphaSliderVisible();
+        final boolean hasAlpha = mWithAlpha;
         final String format = hasAlpha ? "%08x" : "%06x";
         final int mask = hasAlpha ? 0xFFFFFFFF : 0x00FFFFFF;
 
@@ -154,7 +153,7 @@ public class ColorPickerDialog extends AlertDialog implements
         if (!hexColor.isEmpty()) {
             try {
                 int color = Color.parseColor('#' + hexColor);
-                if (!mColorPicker.isAlphaSliderVisible()) {
+                if (!mWithAlpha) {
                     color |= 0xFF000000; // set opaque
                 }
                 mColorPicker.setColor(color);

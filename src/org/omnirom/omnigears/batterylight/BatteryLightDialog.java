@@ -68,10 +68,11 @@ public class BatteryLightDialog extends AlertDialog implements
     private LinearLayout mColorPanelView;
     private ColorPanelView mNewListColor;
     private LedColorAdapter mLedColorAdapter;
+    private boolean mWithAlpha;
 
     protected BatteryLightDialog(Context context, int initialColor) {
         super(context);
-
+        mWithAlpha = false;
         mMultiColor = getContext().getResources().getBoolean(R.bool.config_has_multi_color_led);
         init(initialColor);
     }
@@ -105,9 +106,9 @@ public class BatteryLightDialog extends AlertDialog implements
         mNewListColor = (ColorPanelView) layout.findViewById(R.id.color_list_panel);
 
         mColorPicker.setOnColorChangedListener(this);
-        mColorPicker.setColor(color, true);
-
         mHexColorInput.setOnFocusChangeListener(this);
+        setAlphaSliderVisible(mWithAlpha);
+        mColorPicker.setColor(color, true);
 
         mColorList = (Spinner) layout.findViewById(R.id.color_list_spinner);
         mLedColorAdapter = new LedColorAdapter(
@@ -118,7 +119,6 @@ public class BatteryLightDialog extends AlertDialog implements
         mColorList.setOnItemSelectedListener(mColorListListener);
 
         setView(layout);
-        setTitle(R.string.edit_battery_settings);
 
         // show and hide the correct UI depending if we have multi-color led or not
         if (mMultiColor){
@@ -160,7 +160,7 @@ public class BatteryLightDialog extends AlertDialog implements
 
     @Override
     public void onColorChanged(int color) {
-        final boolean hasAlpha = mColorPicker.isAlphaSliderVisible();
+        final boolean hasAlpha = mWithAlpha;
         final String format = hasAlpha ? "%08x" : "%06x";
         final int mask = hasAlpha ? 0xFFFFFFFF : 0x00FFFFFF;
 
@@ -266,7 +266,7 @@ public class BatteryLightDialog extends AlertDialog implements
         if (!hexColor.isEmpty()) {
             try {
                 int color = Color.parseColor('#' + hexColor);
-                if (!mColorPicker.isAlphaSliderVisible()) {
+                if (!mWithAlpha) {
                     color |= 0xFF000000; // set opaque
                 }
                 mColorPicker.setColor(color);
