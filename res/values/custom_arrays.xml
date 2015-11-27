@@ -149,8 +149,8 @@
     </string-array>
 
     <string-array name="navbar_recents_style_entries" translatable="false">
-        <item>@string/keys_action_app_switch</item>
-        <item>@string/keys_action_omniswitch</item>
+        <item>@string/keys_action_app_switch_short</item>
+        <item>@string/keys_action_omniswitch_short</item>
     </string-array>
 
     <string-array name="navbar_recents_style_values" translatable="false">
