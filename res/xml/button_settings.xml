@@ -110,13 +110,6 @@
             android:title="@string/keys_enable_custom_title"
             android:persistent="false" />-->
 
-        <ListPreference
-            android:key="navbar_recents_style"
-            android:title="@string/navbar_recents_style_title"
-            android:entries="@array/navbar_recents_style_entries"
-            android:entryValues="@array/navbar_recents_style_values"
-            android:persistent="false"/>
-
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -254,6 +247,17 @@
             android:entryValues="@array/keys_action_values"
             android:persistent="false"
             android:dependency="keys_enable_custom" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="button_other"
+        android:title="@string/button_other_title" >
+        <ListPreference
+            android:key="navbar_recents_style"
+            android:title="@string/navbar_recents_style_title"
+            android:entries="@array/navbar_recents_style_entries"
+            android:entryValues="@array/navbar_recents_style_values"
+            android:persistent="false"/>
     </PreferenceCategory>
 
 <!--    <PreferenceCategory

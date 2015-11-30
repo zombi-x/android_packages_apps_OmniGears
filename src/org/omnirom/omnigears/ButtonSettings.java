@@ -479,15 +479,15 @@ public class ButtonSettings extends SettingsPreferenceFragment implements OnPref
                 keysCategory.removePreference(mButtonBrightness);
             }
             updateDisableHWKeyEnablement(harwareKeysDisable);
-
-            mNavbarRecentsStyle = (ListPreference) findPreference(NAVIGATION_BAR_RECENTS_STYLE);
-            int recentsStyle = Settings.System.getInt(resolver,
-                    Settings.System.NAVIGATION_BAR_RECENTS, 0);
-
-            mNavbarRecentsStyle.setValue(Integer.toString(recentsStyle));
-            mNavbarRecentsStyle.setSummary(mNavbarRecentsStyle.getEntry());
-            mNavbarRecentsStyle.setOnPreferenceChangeListener(this);
         }
+
+        mNavbarRecentsStyle = (ListPreference) findPreference(NAVIGATION_BAR_RECENTS_STYLE);
+        int recentsStyle = Settings.System.getInt(resolver,
+                Settings.System.NAVIGATION_BAR_RECENTS, 0);
+
+        mNavbarRecentsStyle.setValue(Integer.toString(recentsStyle));
+        mNavbarRecentsStyle.setSummary(mNavbarRecentsStyle.getEntry());
+        mNavbarRecentsStyle.setOnPreferenceChangeListener(this);
 
 //        final PreferenceCategory headsethookCategory =
 //                (PreferenceCategory) prefScreen.findPreference(CATEGORY_HEADSETHOOK);

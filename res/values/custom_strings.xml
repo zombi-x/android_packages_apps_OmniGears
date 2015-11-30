@@ -41,7 +41,7 @@
     <string name="keys_app_switch_long_press_title">App switch key (long press)</string>
     <string name="keys_action_nothing">No action</string>
     <string name="keys_action_menu">Open/close menu</string>
-    <string name="keys_action_app_switch">AOSP recents</string>
+    <string name="keys_action_app_switch">Default recents</string>
     <string name="keys_action_search">Search assistant</string>
     <string name="keys_action_voice_search">Voice search</string>
     <string name="keys_action_in_app_search">In-app search</string>
@@ -63,6 +63,9 @@
     <string name="button_home_wake_summary">Pressing the home button will wake the device</string>
     <string name="button_home_answers_call_title">Button answers call</string>
     <string name="button_home_answers_call_summary">Pressing the home button will answer incoming call</string>
+    <string name="button_other_title">Recents</string>
+    <string name="keys_action_app_switch_short">Default</string>
+    <string name="keys_action_omniswitch_short">OmniSwitch</string>
 
     <!-- Doze pulse (ambient display) options -->
     <string name="doze_overwrite_value_title">Overwrite value</string>
@@ -223,4 +226,8 @@
     <string name="status_bar_network_activity_title">Activity indicators</string>
     <string name="status_bar_network_activity_summary">Show indicators in signal bars</string>
 
+    <string name="quick_settings_title">Quick Settings</string>
+    <string name="quick_settings_summary">Configure quick settings tiles</string>
+    <string name="status_bar_icon_blacklist_title">Status bar icons</string>
+    <string name="status_bar_icon_blacklist_summary">Configure what icons are shown on status bar</string>
 </resources>
