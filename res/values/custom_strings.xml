@@ -198,6 +198,7 @@
    <string name="notification_title">Notification panel</string>
    <string name="status_bar_custom_header_title">Custom header image</string>
    <string name="status_bar_custom_header_summary">Enable notification panel header image</string>
+   <string name="daylight_header_pack_title">Header image pack</string>
 
     <!-- Network traffic -->
     <string name="network_traffic_title">Network traffic</string>
