@@ -122,7 +122,6 @@
   <string name="led_color_green">ZIelony</string>
   <string name="led_color_red">Czerwony</string>
   <string name="led_color_blue">Niebieski</string>
-  <string name="battery_title">Wskaźnik baterii</string>
   <string name="battery_style_title">Styl</string>
   <string name="battery_percent_title">Pokaż procent</string>
   <string name="battery_percent_none">Nigdy</string>

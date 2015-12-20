@@ -122,7 +122,6 @@
   <string name="led_color_green">Зелёный</string>
   <string name="led_color_red">Красный</string>
   <string name="led_color_blue">Синий</string>
-  <string name="battery_title">Батарея на панели состояния</string>
   <string name="battery_style_title">Стиль</string>
   <string name="battery_percent_title">Показывать проценты</string>
   <string name="battery_percent_none">Никогда</string>
