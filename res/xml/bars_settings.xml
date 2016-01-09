@@ -34,6 +34,12 @@
                 android:summary="@string/double_tap_to_sleep_summary"
                 android:defaultValue="false" />
 
+            <com.android.settings.preference.SystemCheckBoxPreference
+                android:key="enable_tablet_navigation"
+                android:title="@string/enable_tablet_navigation_title"
+                android:summary="@string/enable_tablet_navigation_summary"
+                android:defaultValue="false" />
+
             <!--<PreferenceScreen
                 android:key="statusbar_battery"
                 android:title="@string/battery_title"

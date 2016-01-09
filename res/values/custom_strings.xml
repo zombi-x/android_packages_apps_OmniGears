@@ -71,6 +71,10 @@
     <string name="double_tap_to_sleep_title">Double-tap to sleep</string>
     <string name="double_tap_to_sleep_summary">Double tap on the status bar to put the device to sleep</string>
 
+    <!-- Enable Tablet Style navigation bar -->
+    <string name="enable_tablet_navigation_title">Use tablet layout navigation bar</string>
+    <string name="enable_tablet_navigation_summary">Tablet style shows back and home on the left side and recents on the right side of the navigation bar</string>
+
     <!-- Doze pulse (ambient display) options -->
     <string name="doze_overwrite_value_title">Overwrite value</string>
     <string name="doze_overwrite_value_summary">Allow to overwrite default value with user config</string>
