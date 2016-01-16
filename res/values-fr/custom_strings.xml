@@ -116,7 +116,6 @@
   <string name="led_color_green">Vert</string>
   <string name="led_color_red">Rouge</string>
   <string name="led_color_blue">Bleu</string>
-  <string name="battery_title">Batterie de la barre de statut</string>
   <string name="battery_style_title">Style</string>
   <string name="battery_percent_title">Afficher le pourcentage</string>
   <string name="battery_percent_none">Jamais</string>
