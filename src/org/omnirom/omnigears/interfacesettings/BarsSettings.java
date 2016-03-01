@@ -38,6 +38,7 @@ import android.preference.PreferenceCategory;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
+import android.util.Log;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
@@ -61,9 +62,12 @@ public class BarsSettings extends SettingsPreferenceFragment implements
     private static final String DAYLIGHT_HEADER_PACK = "daylight_header_pack";
     private static final String DEFAULT_HEADER_PACKAGE = "com.android.systemui";
     private static final String NAVIGATIONBAR_ROOT = "category_navigationbar";
+    private static final String TABLET_NAVIGATION_BAR = "enable_tablet_navigation";
+    private static final String CUSTOM_HEADER_IMAGE_SHADOW = "status_bar_custom_header_shadow";
 
     private ListPreference mDaylightHeaderPack;
     private CheckBoxPreference mCustomHeaderImage;
+    private SeekBarPreference mHeaderShadow;
 
     @Override
     protected int getMetricsCategory() {
@@ -79,7 +83,7 @@ public class BarsSettings extends SettingsPreferenceFragment implements
 
         // Navigationbar catagory will not be displayed when the device is not a tablet
         // or the device has physical keys
-        if ((!DeviceUtils.deviceSupportNavigationBar(getActivity())) || !DeviceUtils.isTablet(getActivity())) {
+        if ((!DeviceUtils.deviceSupportNavigationBar(getActivity())) || DeviceUtils.isPhone(getActivity())) {
             prefScreen.removePreference(findPreference(NAVIGATIONBAR_ROOT));
         }
 
@@ -100,8 +104,12 @@ public class BarsSettings extends SettingsPreferenceFragment implements
             settingHeaderPackage = DEFAULT_HEADER_PACKAGE;
         }
         mDaylightHeaderPack = (ListPreference) findPreference(DAYLIGHT_HEADER_PACK);
-        mDaylightHeaderPack.setEntries(getAvailableHeaderPacksEntries());
-        mDaylightHeaderPack.setEntryValues(getAvailableHeaderPacksValues());
+
+        List<String> entries = new ArrayList<String>();
+        List<String> values = new ArrayList<String>();
+        getAvailableHeaderPacks(entries, values);
+        mDaylightHeaderPack.setEntries(entries.toArray(new String[entries.size()]));
+        mDaylightHeaderPack.setEntryValues(values.toArray(new String[values.size()]));
 
         int valueIndex = mDaylightHeaderPack.findIndexOfValue(settingHeaderPackage);
         if (valueIndex == -1) {
@@ -114,7 +122,12 @@ public class BarsSettings extends SettingsPreferenceFragment implements
         mDaylightHeaderPack.setValueIndex(valueIndex >= 0 ? valueIndex : 0);
         mDaylightHeaderPack.setSummary(mDaylightHeaderPack.getEntry());
         mDaylightHeaderPack.setOnPreferenceChangeListener(this);
-        mDaylightHeaderPack.setEnabled(customHeaderImage);
+
+        mHeaderShadow = (SeekBarPreference) findPreference(CUSTOM_HEADER_IMAGE_SHADOW);
+        final int headerShadow = Settings.System.getInt(getContentResolver(),
+                Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, 0);
+        mHeaderShadow.setValue((int)(((double) headerShadow / 255) * 100));
+        mHeaderShadow.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -123,7 +136,6 @@ public class BarsSettings extends SettingsPreferenceFragment implements
             final boolean value = ((CheckBoxPreference)preference).isChecked();
             Settings.System.putInt(getContentResolver(),
                     Settings.System.STATUS_BAR_CUSTOM_HEADER, value ? 1 : 0);
-            mDaylightHeaderPack.setEnabled(value);
             return true;
         }
         // If we didn't handle it, let preferences handle it.
@@ -138,44 +150,47 @@ public class BarsSettings extends SettingsPreferenceFragment implements
                     Settings.System.STATUS_BAR_DAYLIGHT_HEADER_PACK, value);
             int valueIndex = mDaylightHeaderPack.findIndexOfValue(value);
             mDaylightHeaderPack.setSummary(mDaylightHeaderPack.getEntries()[valueIndex]);
+         } else if (preference == mHeaderShadow) {
+            Integer headerShadow = (Integer) newValue;
+            int realHeaderValue = (int) (((double) headerShadow / 100) * 255);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW, realHeaderValue);
         }
         return true;
     }
 
-    private String[] getAvailableHeaderPacksValues() {
-        List<String> headerPacks = new ArrayList<String>();
+    private void getAvailableHeaderPacks(List<String> entries, List<String> values) {
         Intent i = new Intent();
         PackageManager packageManager = getPackageManager();
         i.setAction("org.omnirom.DaylightHeaderPack");
         for (ResolveInfo r : packageManager.queryIntentActivities(i, 0)) {
             String packageName = r.activityInfo.packageName;
             if (packageName.equals(DEFAULT_HEADER_PACKAGE)) {
-                headerPacks.add(0, packageName);
+                values.add(0, packageName);
             } else {
-                headerPacks.add(packageName);
+                values.add(packageName);
             }
-        }
-        return headerPacks.toArray(new String[headerPacks.size()]);
-    }
-
-    private String[] getAvailableHeaderPacksEntries() {
-        List<String> headerPacks = new ArrayList<String>();
-        Intent i = new Intent();
-        PackageManager packageManager = getPackageManager();
-        i.setAction("org.omnirom.DaylightHeaderPack");
-        for (ResolveInfo r : packageManager.queryIntentActivities(i, 0)) {
-            String packageName = r.activityInfo.packageName;
             String label = r.activityInfo.loadLabel(getPackageManager()).toString();
             if (label == null) {
                 label = r.activityInfo.packageName;
             }
             if (packageName.equals(DEFAULT_HEADER_PACKAGE)) {
-                headerPacks.add(0, label);
+                entries.add(0, label);
             } else {
-                headerPacks.add(label);
+                entries.add(label);
             }
         }
-        return headerPacks.toArray(new String[headerPacks.size()]);
+        i.setAction("org.omnirom.DaylightHeaderPack1");
+        for (ResolveInfo r : packageManager.queryIntentActivities(i, 0)) {
+            String packageName = r.activityInfo.packageName;
+            values.add(packageName  + "/" + r.activityInfo.name);
+
+            String label = r.activityInfo.loadLabel(getPackageManager()).toString();
+            if (label == null) {
+                label = packageName;
+            }
+            entries.add(label);
+        }
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -196,6 +211,10 @@ public class BarsSettings extends SettingsPreferenceFragment implements
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     ArrayList<String> result = new ArrayList<String>();
+                    if ((!DeviceUtils.deviceSupportNavigationBar(context)) ||
+                            DeviceUtils.isPhone(context)) {
+                        result.add(TABLET_NAVIGATION_BAR);
+                    }
                     return result;
                 }
             };

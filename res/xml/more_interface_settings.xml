@@ -16,8 +16,6 @@
  -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:key="interface_more"
-        android:title="@string/interface_more_title"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
         <PreferenceCategory
@@ -69,6 +67,19 @@
                 android:key="dashboard_columns"
                 android:title="@string/dashboard_columns_title"
                 android:dialogTitle="@string/dashboard_columns_title" />
+
+            <CheckBoxPreference
+                android:key="dashboard_columns_resize"
+                android:title="@string/dashboard_colums_resize_title"
+                android:summary="@string/dashboard_colums_resize_summary"
+                android:defaultValue="true" />
+
+            <PreferenceScreen
+                android:key="global_actions"
+                android:title="@string/global_actions_title"
+                android:summary="@string/global_actions_summary"
+                android:fragment="org.omnirom.omnigears.interfacesettings.GlobalActionsSettings" />
+
         </PreferenceCategory>
 </PreferenceScreen>
 
