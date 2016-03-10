@@ -296,6 +296,8 @@
 
     <string name="dashboard_colums_resize_title">Orientation adjustment</string>
     <string name="dashboard_colums_resize_summary">Automatically adjust settings columns based on orientation.</string>
+    <string name="dashboard_divider_show_title">Show columns divider</string>
+    <string name="dashboard_divider_show_summary"></string>
 
     <!-- global acions config -->
     <string name="global_actions_power_title">Power</string>
