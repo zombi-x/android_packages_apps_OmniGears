@@ -19,4 +19,6 @@
     <dimen name="alert_dialog_padding_material">20dp</dimen>
     <dimen name="color_preference_width">18dip</dimen>
     <dimen name="color_preference_height">18dip</dimen>
+    <dimen name="drag_grip_ridge_size">6dp</dimen>
+    <dimen name="drag_grip_ridge_gap">4dp</dimen>
 </resources>
